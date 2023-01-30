@@ -10,6 +10,7 @@ public class ComprobanteRequest {
     private int clienteId;
 
     private List<Producto> productosComprobante;
+
     public ComprobanteRequest() {
     }
 

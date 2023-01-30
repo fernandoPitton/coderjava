@@ -13,10 +13,11 @@ public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
 
-    public Producto guardarProducto(Producto productoAGuardar){
+    public Producto guardarProducto(Producto productoAGuardar) {
         return productoRepository.save(productoAGuardar);
     }
-    public Optional<Producto> leerProducto(Long idProducto){
+
+    public Optional<Producto> leerProducto(Long idProducto) {
 
         return productoRepository.findById(idProducto);
 

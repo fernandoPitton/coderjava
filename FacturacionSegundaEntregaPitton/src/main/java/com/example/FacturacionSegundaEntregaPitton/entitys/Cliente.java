@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="CLIENTE")
+@Table(name = "CLIENTE")
 public class Cliente {
     public Cliente() {
     }
 
-    public Cliente( String nombre, String apellido, int dni) {
+    public Cliente(String nombre, String apellido, int dni) {
 
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
     }
 
-    public Cliente(int clienteId,  String nombre, String apellido, int dni) {
+    public Cliente(int clienteId, String nombre, String apellido, int dni) {
         this.clienteId = clienteId;
         this.dni = dni;
         this.nombre = nombre;
@@ -38,7 +38,6 @@ public class Cliente {
     private String apellido;
     @Column(name = "DNI")
     private int dni;
-
 
 
     @OneToMany(mappedBy = "clienteRelacion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -41,14 +41,14 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Producto(Long productoId, int codigo, String descripcion, int cantidad, float precio, List<Linea> linea) {
+    public Producto(Long productoId, int codigo, String descripcion, int cantidad, float precio) {
         this.productoId = productoId;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.precio = precio;
-        this.linea = linea;
     }
+
     public Long getProductoId() {
         return productoId;
     }

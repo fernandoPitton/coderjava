@@ -13,15 +13,16 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public Cliente guardarCliente(Cliente clienteAGuardar){
+    public Cliente guardarCliente(Cliente clienteAGuardar) {
         return clienteRepository.save(clienteAGuardar);
     }
-    public Optional<Cliente> leerCliente(Long idCliente){
 
-        return  clienteRepository.findById(idCliente);
+    public Optional<Cliente> leerCliente(Long idCliente) {
+
+        return clienteRepository.findById(idCliente);
 
 
-}
+    }
 
     public String borrarCliente(Long idCliente) {
         clienteRepository.deleteById(idCliente);

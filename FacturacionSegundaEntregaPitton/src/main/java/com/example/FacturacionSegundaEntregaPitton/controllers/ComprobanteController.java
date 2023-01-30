@@ -30,22 +30,23 @@ public class ComprobanteController {
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> crearComprobante(@RequestBody ComprobanteRequest comprobanteRecibido) {
 //Comprobamos si el cliente existe
-            long clienteId = (long) comprobanteRecibido.getClienteId();
-            Optional<Cliente> posibleCliente = clienteService.leerCliente(clienteId);
-            if (!posibleCliente.isPresent()){
-                return ResponseEntity.ok("El cliente que ingreso no existe");}
+        long clienteId = (long) comprobanteRecibido.getClienteId();
+        Optional<Cliente> posibleCliente = clienteService.leerCliente(clienteId);
+        if (!posibleCliente.isPresent()) {
+            return ResponseEntity.ok("El cliente que ingreso no existe");
+        }
 //Comprobamos si el pruducto existe
-            for (int i = 0; i < comprobanteRecibido.getProductosComprobante().size(); i++) {
-             Optional<Producto> posibleProducto = productoService.leerProducto((long) comprobanteRecibido.getProductosComprobante().get(i).getProductoId());
-            if (!posibleProducto.isPresent()){
-                return ResponseEntity.ok("El productoId: "+comprobanteRecibido.getProductosComprobante().get(i).getProductoId()+ " no existe");
+        for (int i = 0; i < comprobanteRecibido.getProductosComprobante().size(); i++) {
+            Optional<Producto> posibleProducto = productoService.leerProducto((long) comprobanteRecibido.getProductosComprobante().get(i).getProductoId());
+            if (!posibleProducto.isPresent()) {
+                return ResponseEntity.ok("El productoId: " + comprobanteRecibido.getProductosComprobante().get(i).getProductoId() + " no existe");
             }
 //Comprobamos si hay stock suficiente del pruducto
-            if( posibleProducto.get().getCantidad()< comprobanteRecibido.getProductosComprobante().get(i).getCantidad()){
-                return ResponseEntity.ok("El productoId: "+comprobanteRecibido.getProductosComprobante().get(i).getProductoId()+ " no tiene stock suficiente");
+            if (posibleProducto.get().getCantidad() < comprobanteRecibido.getProductosComprobante().get(i).getCantidad()) {
+                return ResponseEntity.ok("El productoId: " + comprobanteRecibido.getProductosComprobante().get(i).getProductoId() + " no tiene stock suficiente");
             }
-            }
-            //si se valida correctamente creamos el comprobante
+        }
+        //si se valida correctamente creamos el comprobante
         return ResponseEntity.ok(comprobanteService.crearComprobante(comprobanteRecibido));
     }
 
@@ -56,21 +57,25 @@ public class ComprobanteController {
         Optional<Comprobante> posibleComprobante = comprobanteService.leerComprobante(id);
         if (posibleComprobante.isPresent()) {
             return ResponseEntity.ok(posibleComprobante);
-        }else{return ResponseEntity.ok("Comprobante inexistente");}
+        } else {
+            return ResponseEntity.ok("Comprobante inexistente");
+        }
     }
 
     //http://localhost:8080/comprobante/1
     @PutMapping(value = "{id}")
     public ResponseEntity<?> obtenerComprobantePorID(@PathVariable(name = "id") final Long id,
-                                                 @RequestBody Comprobante comprobanteRecibido) {
+                                                     @RequestBody Comprobante comprobanteRecibido) {
         Optional<Comprobante> posibleComprobante = comprobanteService.leerComprobante(id);
         if (posibleComprobante.isPresent()) {
-        Comprobante comprobanteBuscado = posibleComprobante.get();
-        comprobanteBuscado.setFecha(comprobanteRecibido.getFecha());
-        comprobanteBuscado.setCantidad(comprobanteRecibido.getCantidad());
-        comprobanteBuscado.setTotal(comprobanteRecibido.getTotal());
-        return ResponseEntity.ok(comprobanteService.guardarComprobante(comprobanteBuscado));
-        }else{return ResponseEntity.ok("Comprobante Inexistente");}
+            Comprobante comprobanteBuscado = posibleComprobante.get();
+            comprobanteBuscado.setFecha(comprobanteRecibido.getFecha());
+            comprobanteBuscado.setCantidad(comprobanteRecibido.getCantidad());
+            comprobanteBuscado.setTotal(comprobanteRecibido.getTotal());
+            return ResponseEntity.ok(comprobanteService.guardarComprobante(comprobanteBuscado));
+        } else {
+            return ResponseEntity.ok("Comprobante Inexistente");
+        }
 
     }
 

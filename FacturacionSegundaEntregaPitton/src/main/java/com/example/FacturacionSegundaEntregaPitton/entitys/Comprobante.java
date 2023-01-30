@@ -6,31 +6,18 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name= "COMPROBANTE")
+@Table(name = "COMPROBANTE")
 public class Comprobante {
-    public Comprobante(String fecha, int cantidad, float total) {
-        this.fecha = fecha;
-        this.cantidad = cantidad;
-        this.total = total;
-    }
-
-    public Comprobante(String fecha, int cantidad, float total, Cliente clienteRelacion) {
-        this.fecha = fecha;
-        this.cantidad = cantidad;
-        this.total = total;
-        this.clienteRelacion = clienteRelacion;
-    }
 
     public Comprobante() {
     }
 
-    public Comprobante(Long comprobanteId, String fecha, int cantidad, float total, Cliente clienteRelacion, List<Linea> linea) {
+    public Comprobante(Long comprobanteId, String fecha, int cantidad, float total, Cliente clienteRelacion) {
         this.comprobanteId = comprobanteId;
         this.fecha = fecha;
         this.cantidad = cantidad;
         this.total = total;
         this.clienteRelacion = clienteRelacion;
-        this.linea = linea;
     }
 
     @Id
@@ -46,7 +33,7 @@ public class Comprobante {
     private float total;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="ClienteId")
+    @JoinColumn(name = "ClienteId")
     private Cliente clienteRelacion;
     @OneToMany(mappedBy = "comprobanteRelacion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Linea> linea;
@@ -114,14 +101,13 @@ public class Comprobante {
 
     @Override
     public String toString() {
-//        return "Comprobante{" +
-//                "ComprobanteId=" + comprobanteId +
-//                ", fecha='" + fecha + '\'' +
-//                ", cantidad=" + cantidad +
-//                ", total=" + total +
-//                ", clienteRelacion=" + clienteRelacion +
-//                ", linea=" + linea +
-//                '}';
-        return "toString";
+        return "Comprobante{" +
+                "comprobanteId=" + comprobanteId +
+                ", fecha='" + fecha + '\'' +
+                ", cantidad=" + cantidad +
+                ", total=" + total +
+                ", clienteRelacion=" + clienteRelacion +
+                ", linea=" + linea +
+                '}';
     }
 }

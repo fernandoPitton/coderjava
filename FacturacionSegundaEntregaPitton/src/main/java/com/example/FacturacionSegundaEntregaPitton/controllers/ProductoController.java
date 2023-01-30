@@ -1,7 +1,6 @@
 package com.example.FacturacionSegundaEntregaPitton.controllers;
 
 
-
 import com.example.FacturacionSegundaEntregaPitton.entitys.Producto;
 import com.example.FacturacionSegundaEntregaPitton.services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class ProductoController {
     //http://localhost:8080/producto/1
     @PutMapping(value = "{id}")
     public ResponseEntity<?> obtenerProductoPorID(@PathVariable(name = "id") final Long id,
-                                                 @RequestBody Producto productoRecibido) {
+                                                  @RequestBody Producto productoRecibido) {
 
         Optional<Producto> posibleProducto = productoService.leerProducto(id);
         if (posibleProducto.isPresent()) {
@@ -46,7 +45,7 @@ public class ProductoController {
             productoBuscado.setCantidad(productoRecibido.getCantidad());
             productoBuscado.setPrecio(productoRecibido.getPrecio());
             return ResponseEntity.ok(productoService.guardarProducto(productoBuscado));
-        }else {
+        } else {
             return ResponseEntity.ok("Producto Inexistente");
         }
     }

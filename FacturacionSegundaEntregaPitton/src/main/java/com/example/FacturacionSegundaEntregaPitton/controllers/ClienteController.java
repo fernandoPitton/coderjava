@@ -1,7 +1,6 @@
 package com.example.FacturacionSegundaEntregaPitton.controllers;
 
 
-
 import com.example.FacturacionSegundaEntregaPitton.entitys.Cliente;
 import com.example.FacturacionSegundaEntregaPitton.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,9 @@ public class ClienteController {
             clienteBuscado.setDni(clienteRecibido.getDni());
             return ResponseEntity.ok(clienteService.guardarCliente(clienteBuscado));
 
-        }else{return ResponseEntity.ok("Cliente Inexistente");}
+        } else {
+            return ResponseEntity.ok("Cliente Inexistente");
+        }
     }
 
     @DeleteMapping(value = "{id}")

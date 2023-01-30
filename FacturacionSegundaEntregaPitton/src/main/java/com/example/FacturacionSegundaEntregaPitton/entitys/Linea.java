@@ -10,14 +10,8 @@ public class Linea {
     public Linea() {
     }
 
-    public Linea(String descripcion, int cantidad, float precio) {
-        this.descripcion = descripcion;
-        this.cantidad = cantidad;
-        this.precio = precio;
-    }
 
-    public Linea( String descripcion, int cantidad, float precio, Producto productoRelacion, Long comprobanteRelacion) {
-//        this.lineaId = lineaId;
+    public Linea(String descripcion, int cantidad, float precio, Producto productoRelacion, Comprobante comprobanteRelacion) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -37,12 +31,12 @@ public class Linea {
     @Column(name = "Precio")
     private float precio;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name="ComprobanteId")
-    private Long comprobanteRelacion;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ComprobanteId")
+    private Comprobante comprobanteRelacion;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="ProductoId")
+    @JoinColumn(name = "ProductoId")
     private Producto productoRelacion;
 
     public int getLineaId() {
@@ -77,11 +71,11 @@ public class Linea {
         this.precio = precio;
     }
 
-    public Long getComprobanteRelacion() {
+    public Comprobante getComprobanteRelacion() {
         return comprobanteRelacion;
     }
 
-    public void setComprobanteRelacion(Long comprobanteRelacion) {
+    public void setComprobanteRelacion(Comprobante comprobanteRelacion) {
         this.comprobanteRelacion = comprobanteRelacion;
     }
 

@@ -22,17 +22,17 @@ public class Fecha {
         this.isDayLightSavingsTime = isDayLightSavingsTime;
     }
 
-    public static String getApi(){
-        try{
-        RestTemplate restTemplate = new RestTemplate();
-        final String url = "http://worldclockapi.com/api/json/utc/now";
-        Fecha fecha = restTemplate.getForObject(url, Fecha.class);
+    public static String getApi() {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            final String url = "http://worldclockapi.com/api/json/utc/now";
+            Fecha fecha = restTemplate.getForObject(url, Fecha.class);
 
-          String fechaAMostrar= fecha.getCurrentDateTime();
+            String fechaAMostrar = fecha.getCurrentDateTime();
 
-          return fechaAMostrar;
-    }catch (Exception e){ //en caso de que se pierda la conexion con la API se aplica la fecha local
-            Date fechaActual= Date.from(Instant.now());
+            return fechaAMostrar;
+        } catch (Exception e) { //en caso de que se pierda la conexion con la API se aplica la fecha local
+            Date fechaActual = Date.from(Instant.now());
             return String.valueOf(fechaActual);
         }
 
